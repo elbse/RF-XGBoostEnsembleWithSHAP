@@ -1,6 +1,6 @@
 import streamlit as st
-import plotly.graph_objects as go
 from utils import get_shap_values
+from components import create_feature_bar_chart
 
 def show_shap_explainability():
     """SHAP Explainability Page"""
@@ -14,7 +14,7 @@ def show_shap_explainability():
         <h1 style="font-size: 2.5rem; margin-top: 0.5rem;">
             <span class="gradient-text">SHAP Explainability</span>
         </h1>
-        <p style="color: #9CA3AF;">Understanding feature contributions using SHAP (SHapley Additive exPlanations)</p>
+        <p style="color: #9CA3AF;">Understanding feature contributions using SHAP (Shapley Additive exPlanations)</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -28,7 +28,6 @@ def show_shap_explainability():
         features = list(shap_values.keys())
         values = list(shap_values.values())
         
-        from components import create_feature_bar_chart
         fig = create_feature_bar_chart(features, values)
         st.plotly_chart(fig, use_container_width=True)
         
@@ -54,6 +53,8 @@ def show_shap_explainability():
         global_importance = [abs(v) for v in values]
         sorted_idx = sorted(range(len(global_importance)), key=lambda i: global_importance[i], reverse=True)
         
+        import plotly.graph_objects as go
+        
         fig2 = go.Figure()
         fig2.add_trace(go.Bar(
             x=[global_importance[i] for i in sorted_idx[:7]],
@@ -77,6 +78,8 @@ def show_shap_explainability():
     # Waterfall plot for single prediction
     st.markdown('<div class="glass-card" style="margin-top: 1rem;">', unsafe_allow_html=True)
     st.markdown("### 🌊 Waterfall Plot — Single Prediction Explanation")
+    
+    import plotly.graph_objects as go
     
     base_value = 0.487
     final_value = base_value + sum(values[:7])

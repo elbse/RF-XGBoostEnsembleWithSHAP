@@ -54,12 +54,10 @@ def show_research_comparison():
             {"rank": 1, "model": "Our Model", "score": "98.7%", "improvement": "+4.5%"},
             {"rank": 2, "model": "MaMaDroid", "score": "94.2%", "improvement": "baseline"},
             {"rank": 3, "model": "Drebin", "score": "93.5%", "improvement": "-0.7%"},
-            {"rank": 4, "model": "DroidAPIMiner", "score": "91.8%", "improvement": "-2.4%"},
-            {"rank": 5, "model": "DroidMat", "score": "89.1%", "improvement": "-5.1%"}
         ]
         
         for item in rankings:
-            medal = "🥇" if item['rank'] == 1 else "🥈" if item['rank'] == 2 else "🥉" if item['rank'] == 3 else "📊"
+            medal = "🥇" if item['rank'] == 1 else "🥈" if item['rank'] == 2 else "🥉"
             st.markdown(f"""
             <div style="background: rgba(59, 130, 246, 0.1); border-radius: 12px; padding: 0.75rem; margin-bottom: 0.5rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -70,9 +68,6 @@ def show_research_comparison():
                     <div>
                         <span style="color: #3B82F6; font-weight: 700;">{item['score']}</span>
                     </div>
-                </div>
-                <div style="font-size: 0.7rem; color: {'#10B981' if '+' in item['improvement'] else '#EF4444'}; margin-top: 0.25rem;">
-                    {item['improvement']} vs baseline
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -87,7 +82,6 @@ def show_research_comparison():
         {"title": "Drebin: Effective and Explainable Detection of Android Malware", "venue": "NDSS 2014", "citations": "1,200+"},
         {"title": "MaMaDroid: Detecting Android Malware by Building Markov Chains", "venue": "CCS 2016", "citations": "450+"},
         {"title": "DroidMat: Android Malware Detection through Manifest and API Calls", "venue": "AINA 2013", "citations": "380+"},
-        {"title": "DroidAPIMiner: Mining API-Level Features for Android Malware Detection", "venue": "WiSec 2014", "citations": "320+"},
     ]
     
     for paper in papers:
@@ -97,26 +91,5 @@ def show_research_comparison():
             <div style="font-size: 0.75rem; color: #9CA3AF;">{paper['venue']} | Citations: {paper['citations']}</div>
         </div>
         """, unsafe_allow_html=True)
-    
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Summary
-    st.markdown('<div class="glass-card" style="margin-top: 1rem;">', unsafe_allow_html=True)
-    st.markdown("### 📈 Key Findings")
-    
-    st.markdown("""
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-        <div style="background: rgba(16, 185, 129, 0.1); border-radius: 12px; padding: 1rem;">
-            <div style="font-size: 2rem;">🎯</div>
-            <div style="font-weight: 600; margin-top: 0.5rem;">Superior Performance</div>
-            <div style="font-size: 0.875rem; color: #9CA3AF;">Our ensemble achieves 98.7% accuracy, outperforming all baseline models</div>
-        </div>
-        <div style="background: rgba(59, 130, 246, 0.1); border-radius: 12px; padding: 1rem;">
-            <div style="font-size: 2rem;">🔍</div>
-            <div style="font-weight: 600; margin-top: 0.5rem;">Explainable AI</div>
-            <div style="font-size: 0.875rem; color: #9CA3AF;">SHAP provides interpretable feature contributions for each prediction</div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
     
     st.markdown('</div>', unsafe_allow_html=True)

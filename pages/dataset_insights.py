@@ -92,16 +92,15 @@ def show_dataset_insights():
     n_samples = 800
     benign_tsne = np.random.normal([-3, -2], [1.2, 1.2], (n_samples//2, 2))
     malware_tsne = np.random.normal([2, 3], [1.5, 1.5], (n_samples//2, 2))
-    tsne_data = np.vstack([benign_tsne, malware_tsne])
     
     fig3 = go.Figure()
     fig3.add_trace(go.Scatter(
-        x=tsne_data[:n_samples//2, 0], y=tsne_data[:n_samples//2, 1],
+        x=benign_tsne[:, 0], y=benign_tsne[:, 1],
         mode='markers', name='Benign',
         marker=dict(color='#10B981', size=6, opacity=0.6)
     ))
     fig3.add_trace(go.Scatter(
-        x=tsne_data[n_samples//2:, 0], y=tsne_data[n_samples//2:, 1],
+        x=malware_tsne[:, 0], y=malware_tsne[:, 1],
         mode='markers', name='Malware',
         marker=dict(color='#EF4444', size=6, opacity=0.6)
     ))

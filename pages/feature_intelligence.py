@@ -61,8 +61,6 @@ def show_feature_intelligence():
         st.markdown('<div class="glass-card">', unsafe_allow_html=True)
         st.markdown("### 📊 Risk Distribution")
         
-        risks = {"Critical": 2, "High": 2, "Medium": 4}
-        
         st.markdown("""
         <div style="margin-bottom: 1rem;">
             <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
@@ -106,11 +104,9 @@ def show_feature_intelligence():
     st.markdown("### 🚨 Suspicious Permission Combinations")
     
     patterns = [
-        {"pattern": "SEND_SMS + INTERNET", "risk": "Critical", "description": "Can send premium SMS and exfiltrate data to remote servers"},
-        {"pattern": "READ_CONTACTS + SEND_SMS", "risk": "Critical", "description": "Can access contacts and send messages without user consent"},
-        {"pattern": "CAMERA + INTERNET", "risk": "High", "description": "Can capture photos/videos and upload to remote servers"},
-        {"pattern": "RECORD_AUDIO + INTERNET", "risk": "High", "description": "Can record audio and transmit to attackers"},
-        {"pattern": "ACCESS_FINE_LOCATION + INTERNET", "risk": "High", "description": "Can track user location and share with remote servers"}
+        {"pattern": "SEND_SMS + INTERNET", "risk": "Critical", "description": "Can send premium SMS and exfiltrate data"},
+        {"pattern": "READ_CONTACTS + SEND_SMS", "risk": "Critical", "description": "Can access contacts and send messages"},
+        {"pattern": "CAMERA + INTERNET", "risk": "High", "description": "Can capture and upload images"},
     ]
     
     for pattern in patterns:
@@ -141,8 +137,7 @@ def show_feature_intelligence():
             <li>Review app permissions before installation</li>
             <li>Avoid apps requesting SMS and Contacts permissions unnecessarily</li>
             <li>Download apps only from official Google Play Store</li>
-            <li>Keep Android OS and security patches updated</li>
-            <li>Use our Rubik scanner for suspicious APK files</li>
+            <li>Use Rubik scanner for suspicious APK files</li>
         </ul>
     </div>
     """, unsafe_allow_html=True)

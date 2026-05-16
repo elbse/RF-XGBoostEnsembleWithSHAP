@@ -2,6 +2,7 @@ import streamlit as st
 import time
 from datetime import datetime
 from utils import get_prediction, format_bytes, calculate_hash
+from components import create_gauge, render_metrics, render_recent_scans
 
 def show_threat_scanner():
     """Threat Scanner Page"""
@@ -62,9 +63,7 @@ def show_threat_scanner():
                     ]
                     
                     for i, phase in enumerate(phases):
-                        status = st.status(phase, expanded=False)
-                        time.sleep(0.5)
-                        status.update(label=f"✓ {phase}", state="complete")
+                        time.sleep(0.3)
                         progress_bar.progress((i + 1) * 20)
                     
                     # Get prediction
@@ -90,13 +89,11 @@ def show_threat_scanner():
         st.markdown("### 📊 System Status")
         
         # Metrics
-        from components import render_metrics
         render_metrics()
         
         st.markdown("---")
         
         # Recent scans
-        from components import render_recent_scans
         render_recent_scans()
         
         st.markdown('</div>', unsafe_allow_html=True)
@@ -111,7 +108,6 @@ def show_threat_scanner():
         col_r1, col_r2 = st.columns([1, 1])
         
         with col_r1:
-            from components import create_gauge
             fig = create_gauge(result['threat_score'], "Threat Level", result['is_malware'])
             st.plotly_chart(fig, use_container_width=True)
         

@@ -1,5 +1,6 @@
 import streamlit as st
 import plotly.graph_objects as go
+import numpy as np
 
 def create_gauge(value, title="Threat Score", is_malware=False):
     """Create a gauge chart"""
@@ -46,4 +47,26 @@ def create_feature_bar_chart(features, values, title="Feature Importance"):
         xaxis=dict(gridcolor='rgba(255,255,255,0.1)')
     )
     fig.add_vline(x=0, line_dash="dash", line_color="white", opacity=0.5)
+    return fig
+
+def create_confusion_matrix(cm, labels):
+    """Create a confusion matrix heatmap"""
+    fig = go.Figure(data=go.Heatmap(
+        z=cm,
+        x=labels,
+        y=labels,
+        text=cm,
+        texttemplate='%{text}',
+        textfont={"size": 16, "color": "white"},
+        colorscale='Blues',
+        showscale=True
+    ))
+    fig.update_layout(
+        height=400,
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color='white'),
+        xaxis=dict(title="Predicted Label"),
+        yaxis=dict(title="Actual Label")
+    )
     return fig

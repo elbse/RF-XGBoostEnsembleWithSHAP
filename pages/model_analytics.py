@@ -1,4 +1,6 @@
 import streamlit as st
+import plotly.graph_objects as go
+import numpy as np
 
 def show_model_analytics():
     """Model Analytics Page"""
@@ -33,45 +35,21 @@ def show_model_analytics():
     st.markdown("### 📊 Confusion Matrix")
     
     st.markdown("""
-    <style>
-    .confusion-matrix {
-        width: 100%;
-        text-align: center;
-        border-collapse: collapse;
-        margin: 1rem 0;
-    }
-    .confusion-matrix th, .confusion-matrix td {
-        padding: 1rem;
-        border: 1px solid rgba(59, 130, 246, 0.3);
-    }
-    .confusion-matrix th {
-        background: rgba(59, 130, 246, 0.2);
-        font-weight: 600;
-    }
-    .confusion-matrix td {
-        font-size: 1.5rem;
-        font-weight: 700;
-    }
-    .tn { color: #10B981; }
-    .fp { color: #EF4444; }
-    .fn { color: #EF4444; }
-    .tp { color: #10B981; }
-    </style>
-    <table class="confusion-matrix">
-        <tr>
-            <th></th>
-            <th>Predicted Benign</th>
-            <th>Predicted Malware</th>
+    <table style="width:100%; text-align:center; border-collapse:collapse; margin:1rem 0;">
+        <tr style="background:rgba(59,130,246,0.2);">
+            <th style="padding:1rem;"></th>
+            <th style="padding:1rem;">Predicted Benign</th>
+            <th style="padding:1rem;">Predicted Malware</th>
         </tr>
         <tr>
-            <th>Actual Benign</th>
-            <td class="tn">4,850</td>
-            <td class="fp">78</td>
+            <th style="padding:1rem;">Actual Benign</th>
+            <td style="padding:1rem; color:#10B981; font-size:1.5rem; font-weight:700;">4,850</td>
+            <td style="padding:1rem; color:#EF4444; font-size:1.5rem; font-weight:700;">78</td>
         </tr>
         <tr>
-            <th>Actual Malware</th>
-            <td class="fn">112</td>
-            <td class="tp">4,760</td>
+            <th style="padding:1rem;">Actual Malware</th>
+            <td style="padding:1rem; color:#EF4444; font-size:1.5rem; font-weight:700;">112</td>
+            <td style="padding:1rem; color:#10B981; font-size:1.5rem; font-weight:700;">4,760</td>
         </tr>
     </table>
     """, unsafe_allow_html=True)
@@ -99,7 +77,7 @@ def show_model_analytics():
         "Ensemble (Ours)": ["98.7%", "97.9%", "97.2%", "97.5%", "0.996"]
     }
     
-    st.table(comparison_data)
+    st.dataframe(comparison_data, use_container_width=True)
     
     st.markdown("""
     <div style="margin-top: 1rem; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-radius: 12px;">

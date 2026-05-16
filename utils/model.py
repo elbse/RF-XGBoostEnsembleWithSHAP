@@ -15,7 +15,10 @@ class ThreatModel:
     def predict(self, file_hash):
         """Predict if file is malware based on hash"""
         # Seed with file hash for consistent results
-        seed = int(file_hash[:8], 16) if len(file_hash) >= 8 else hash(file_hash)
+        try:
+            seed = int(file_hash[:8], 16) if len(file_hash) >= 8 else hash(file_hash)
+        except:
+            seed = hash(file_hash)
         random.seed(seed)
         
         threat_score = random.uniform(0, 1)
